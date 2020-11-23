@@ -1,0 +1,18 @@
+
+---
+- hosts: ios
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+
+   - name: "Puertos conectados"
+     register: puertos_conectados
+     ios_command:
+        commands:
+          - "sh interfaces status | include connected"
+
+   - debug: var=puertos_conectados.stdout_lines
+
+
+
